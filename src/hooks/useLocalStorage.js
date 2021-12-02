@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import useDarkMode from './useDarkMode';
 
 const getSavedValue = (key, initialValue) => {
     const savedValue = JSON.parse(localStorage.getItem(key))
@@ -12,9 +13,7 @@ const useLocalStorage = (key, initialValue) => {
         return getSavedValue(key, initialValue)
     })
 
-    useEffect(()=> {
-        localStorage.setItem(key, JSON.stringify(value))
-    }, [value])
+    useDarkMode(key, value);
 
     return [value, setValue]
 }
